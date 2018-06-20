@@ -1,0 +1,453 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.database;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLDecoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.swing.JOptionPane;
+
+import beans.TrainingModel;
+import beans.movieModel;
+
+
+import code.movieData;
+
+import com.constant.ServerConstants;
+import com.helper.DBUtils;
+import com.helper.SimpleCryptoAndroidJava;
+import com.helper.StringHelper;
+import com.helper.UserModel;
+import com.svm.SvmClassifier;
+
+/**
+ * 
+ * @author Admin
+ */
+public class ConnectionManager extends DBUtils {
+	public static HashMap clickStreamingMap = new HashMap();
+	static {
+		reloadClickStreaming();
+	}
+
+	public static void reloadClickStreaming() {
+//		clickStreamingMap = ConnectionManager
+//				.getQueryMap("SELECT distinct  domain,cate FROM clickstreaming where length(coalesce(cate,''))>3");
+	}
+
+	public static Connection getDBConnection() {
+		Connection conn = null;
+		try {
+			Class.forName(ServerConstants.db_driver);
+			conn = DriverManager.getConnection(ServerConstants.db_url,
+					ServerConstants.db_user, ServerConstants.db_pwd);
+			System.out.println("Got Connection");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(
+					null,
+					"Please start the mysql Service from XAMPP Console.\n"
+							+ ex.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return conn;
+	}
+
+	public static void main(String[] args) throws IOException {
+			getDBConnection();
+			//getRating("2.0");
+	}
+
+	public static UserModel checkLogin(HashMap parameters) {
+		String username = StringHelper.n2s(parameters.get("username"));
+		String pass = StringHelper.n2s(parameters.get("pass"));
+		if (pass.length() > 0) {
+			try {
+				pass = SimpleCryptoAndroidJava.encryptString(pass);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		String query = "SELECT * FROM useraccounts where username like ? and pass = ?";
+		UserModel um = null;
+		List list = DBUtils.getBeanList(UserModel.class, query, username, pass);
+		System.out.println("list size:"+list.size());
+		if (list.size() > 0) {
+			um = (UserModel) list.get(0);
+		}
+		return um;
+	}
+	
+	
+	public static List getTrainedData() {
+		String query = "select * from imdbdata;";
+
+		List list = DBUtils.getBeanList(TrainingModel.class, query);
+		return list;
+	}
+	
+	public static String getmovTitle(int movieid){
+		String query = "SELECT title as movie_title FROM `movies` where movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String movie_title=um.getMovie_title();
+			return movie_title;		
+		}
+		else return "";
+	}
+	
+	public static List getRecommendation(String user){
+		List list1 = null;
+		String query = "SELECT distinct(title),poster FROM `movierating`.`movie_history` where user not like '"+user+"'";
+		List list = DBUtils.getBeanList(movieModel.class, query);
+		for (int i = 0; i < list.size(); i++) {
+			movieModel mv=new movieModel();
+			mv=(movieModel)list.get(i);
+			
+			String data="Select 1 from movie_history where title like '"+mv.getTitle()+"' AND user like '"+user+"'";
+			boolean v=DBUtils.dataExists(data);
+			if (v) {
+				list.remove(i);
+//				list1.add(list.get(i));
+			}
+		}
+		
+		
+		return list;
+	}
+	public static List getHistory(String user){
+		String query = "select * from movie_history where user like '"+user +"'";
+		List list = DBUtils.getBeanList(movieModel.class, query);
+		if(list.size()>0){
+			return list;
+		}
+		return list;
+	}
+	
+	public static void addToHistort(String user,String movie,String poster){
+		String data="Select 1 from movie_history where title like '"+movie+"' AND user like '"+user+"'";
+		boolean v=DBUtils.dataExists(data);
+		if (!v) {
+			String query = "insert into movie_history(title,user,poster)"
+					+"values(?,?,?)";
+			int list = DBUtils.executeUpdate(query, movie,user,poster);
+			if (list > 0) {
+				System.out.println("Movie added to History Successfully");
+
+			} else {
+				System.out.println("Error adding entry to History");
+			}
+		}
+	}
+	
+	public static String getRating(movieModel mv) throws IOException{
+//		 String[] rating ={"1","2","3","4","5","6","7","8","9"};
+//		movieData md = new movieData();
+//		String url = md.getMovieUrl(movie);
+//		movieModel mv = md.getMovieData(url);
+		String language=mv.getLanguage();
+		double lang=3;
+		if(language.equalsIgnoreCase("Hindi")){
+			lang=1;
+		}else if(language.equalsIgnoreCase("English")){
+			lang=2;
+		}else{
+			lang=3;
+		}
+		String director=mv.getDirector_name();
+		String actor=mv.getActor1();
+		String writer = mv.getWriter();
+		actor=actor.substring(0, actor.indexOf(","));
+		String query="SELECT actor_likes FROM `movierating`.`imdbdata` where Actors like '%"+actor+"%'";
+		String ActorLikes=DBUtils.getMaxValueStr(query);
+		
+		String query3="SELECT votes FROM `movierating`.`imdbdata` where Actors like  '%"+actor+"%'";
+		String votes=DBUtils.getMaxValueStr(query3);
+		
+		
+		String query1="SELECT dir_rating  FROM `movierating`.`imdbdata` where Director  like '%"+director+"%'";
+		String dir_rating = DBUtils.getMaxValueStr(query1);
+		
+		String query2="SELECT dir_rating  FROM `movierating`.`imdbdata` where Director  like '%"+writer+"%'";
+		String writer_rating = DBUtils.getMaxValueStr(query2);
+		double v=1000,dr=5,wr=5,al=10000;
+		try{
+		 v=Math.max(1, Double.parseDouble(votes));
+		 dr=Math.max(1, Double.parseDouble(dir_rating));
+		 wr=Math.max(1, Double.parseDouble(writer_rating));
+		 al=Math.max(1, Double.parseDouble(ActorLikes));
+		}catch(Exception e){
+			System.out.println("Empty String");
+		}
+		
+		double featureArray[]={v,dr,wr,al,lang};
+		System.out.println("------Feature Array:----");
+		for (int i = 0; i < featureArray.length; i++) {
+			System.out.print("\t"+featureArray[i]);
+		}
+	       String str= SvmClassifier.applySvmClassifier(featureArray);
+	       System.out.println(ActorLikes+":"+dir_rating+":"+writer_rating);
+			System.out.println(v+","+dr+","+wr+","+al);
+	       System.out.println("\n Rating is:"+str);
+		return ServerConstants.rating[StringHelper.n2i(str)];
+	}
+	
+	
+	public static String getDirector(int movieid){
+		String query = "SELECT name as director_name FROM directors join movies2directors on (directors.directorid=movies2directors.directorid) where movies2directors.movieid=?;";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String director_name=um.getDirector_name();
+			return director_name;		
+		}
+		else return "";
+	}
+	public static String getcountry(int movieid){
+		String query = "SELECT country FROM certificates join movies on (certificates.movieid=movies.movieid) where movies.movieid=?;";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String country=um.getCountry();
+			return country;
+		}
+		else return "";
+	}
+	
+	public static String getLanguage(int movieid){
+		String query = "SELECT language from akatitles where movieid=?;";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String language=um.getLanguage();
+			return language;
+		}
+		else return "";
+	}
+	public static String getGenres(int movieid){
+		String query = "SELECT genre as genres from genres where movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String genres=um.getGenres();
+			return genres;
+		}
+		else return "";
+	}
+	
+	public static String getRank(int movieid){
+		String query = "SELECT rank  from ratings where movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String rank=um.getRank();
+			return rank;
+		}
+		else return "";
+	}
+	
+	public static String getVotes(int movieid){
+		String query = "SELECT votes  from ratings where movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String votes=um.getVotes();
+			return votes;
+		}
+		else return "";
+	}
+	
+	public static String getWriter(int movieid){
+		String query = "SELECT name as writer FROM writers join movies2writers on (writers.writerid=movies2writers.writerid) where movies2writers.movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String writer=um.getWriter();
+			return writer;
+		}
+		else return "";
+	}
+	public static String getProducer(int movieid){
+		String query = "SELECT name as producer FROM producers join movies2producers on (producers.producerid=movies2producers.producerid) where movies2producers.movieid=?";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String producer=um.getProducer();
+			return producer;
+		}
+		else return "";
+	}
+	public static String getDirRating(int movieid){
+		String query = "SELECT name ,directors.directorid as dir_id FROM directors join movies2directors on (directors.directorid=movies2directors.directorid) where movies2directors.movieid=?;";
+		movieModel um = null;
+		String dir_id="";
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			dir_id=um.getDir_id();
+		}
+		 query = "SELECT directorid,ceil(avg(rank)) as dir_rank FROM `movies2directors` d,ratings r where r.movieid=d.movieid and d.directorid like ? group by directorid ;";
+		 list = DBUtils.getBeanList(movieModel.class, query,dir_id);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String dir_rank=um.getDir_rank();
+			return dir_rank;
+		}
+		else return "";
+	}
+	public static String getActor(int movieid){
+		String query = "select actorid from movies2actors where movieid like ?  limit 1;";
+		movieModel um = null;
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			String actor1=um.getActor1();
+			return actor1;
+		}
+		else return "";
+	}
+	
+	public static String getActorRating(int movieid){
+		String query = "SELECT m.movieid,m.actorid as actor1,a.name as actor1 FROM `movies2actors` m,`actors` a where m.actorid=a.actorid and movieid like ? limit 1";
+		movieModel um = null;
+		String actor1="";
+		List list = DBUtils.getBeanList(movieModel.class, query,movieid);
+		if(list.size()>0){
+			um=(movieModel) list.get(0);
+			actor1=um.getActor1();
+			
+		}
+		
+		 query = "SELECT actorid,ceil(avg(rank)) as actor1_likes FROM `movies2actors` m,ratings r where r.movieid=m.movieid and m.actorid like ? group by actorid ;";
+		 list = DBUtils.getBeanList(movieModel.class, query,actor1);
+		 if(list.size()>0){
+				um=(movieModel) list.get(0);
+				String actor1_likes=um.getActor1_likes();
+				return actor1_likes;
+		 }else return "";
+	}
+	
+	public static  int AddDirRating(){
+		String[] name={"Abbas Alibhai Burmawalla,Mastan Alibhai Burmawalla","Abhay Chopra","Abhinay Deo","Abhishek Chaubey","Abhishek Jawkar","Abhishek Kapoor","Abhishek Sharma","Aditya Chopra","Advait Chandan","Agneya Singh,Aban Raza","Ajay Devgn","Ajay Pannalal","Ajit Sinha","Akashdeep","Akshat Verma","Akshay Roy","Ali Abbas Zafar","Amit Masurkar","Amitabha Singh","Ananth Narayan Mahadevan","Anees Bazmee","Anil Ballani","Anshai Lal","Anubhav Sinha","Anup Kurian","Anurag Basu","Anurag Kashyap","Anwer Khan","Apoorva Lakhia","Arshad Siddiqui","Ashish R. Mohan","Ashok Yadav","Ashutosh Gowariker","Ashwiny Iyer Tiwari","Bejoy Nambiar","Bhavin Wadia","Bikas Ranjan Mishra","David Dhawan","Deepak S. Shivdasani","Deepak Tijori","Deven Bhojani","Dharmendra Suresh Desai","Dinesh Vijan","Divya Khosla Kumar","Ejaz Gulab","Fuwad Khan","Gauri Shinde","Gurmeet Ram Rahim Singh","Habib Faisal","Hadi Abrar","Hansal Mehta","Harry Baweja","Harshavardhan Kulkarni","Imtiaz Ali","Indervesh Yogee","Indra Kumar","Indrajit Lankesh","Ishaan Trivedi","James Erskine","Jayant Gilatar","Jim Sheridan","Jitendra Singh Naruka","K.D. Satyam","Kabir Khan","Kanu Behl","Karan Johar","Krish Jagarlamudi","Krishan Hooda","Krishna D.K.,Raj Nidimoru","Krishnadev Yagnik","Kushan Nandy","Madhur Bhandarkar","Mandeep Kumar","Manish Jha","Manoj Sharma","Manoj Tiwari","Milan Luthria","Milap Zaveri","Mohit Suri","Monjoy Joy Mukerji","Mozez Singh","Mrighdeep Lamba","Mudassar Aziz","Munish Bhardwaj","Nagesh Kukunoor","Navdeep Singh","Neeraj Pandey","Nishikant Kamat","Nitesh Tiwari","Nitya Mehra","Omung Kumar","Param Gill","Prabhudheva","Prakash Jha","Pranav Singh,Jitendra Tiwari","Prashant Nair","Qaushiq Mukherjee","R. Balki","R.S. Prasanna","Radhika Rao,Vinay Sapru","Rahul Dholakia","Raja Bundela","Raja Menon","Rajeev Chaudhari","Rajesh Butalia","Rajiv S. Ruia","Rakesh Chaturvedi","Rakeysh Omprakash Mehra","Ram Gopal Varma","Ram Madhvani","Ranjit Tiwari","Remo","Ribhu Dasgupta","Rohit Dhawan","Rohit Shetty","Ruchi Narain","Ruchika Oberoi","S.S. Rajamouli","Saandesh Nayak","Sabir Khan","Sajid,Farhad Samji","Saket Chaudhary","Sameer Sippy","Sanjay Gupta","Sanjay Leela Bhansali","Sanjay Sharma","Sanjeev Sharma","Sanoj Mishra","Saurabh Varma","Shaad Ali","Shailendra Singh","Sharat Katariya","Shashank Khaitan","Shawn Arranha","Shefali Bhushan","Shivaji Lotan Patil","Shivam Nair","Shonali Bose,Nilesh Maniyar","Shoojit Sircar","Shree Narayan Singh","Shreyas Talpade","Shujaat Saudagar","Sohail Khan","Sooraj R. Barjatya","Soumendra Padhi","Srijit Mukherji","Sriram Raghavan","Subhash Kapoor","Sudha Kongara","Suhas Kadav","Sujoy Ghosh","Sunhil Sippy","Sunil Subramani","Sunny Deol","Suresh Triveni","Syed Ahmad Afzal","Tanuj Bhramar","Tigmanshu Dhulia","Umesh","Vaibhav Misra","Vibhu Puri","Vijay","Vikram Bhatt","Vishal Bhardwaj","Vishal Pandya","Vivek Agnihotri","Zoya Akhtar"};
+		double[] rank={4.2,7.3,6.3,7.8,5,5.4,4.2,3.8,8.4,5.7,6.4,5.4,6.8,2.9,7.1,5.7,6.9,7.9,7,7.2,5.6,4.2,6.1,4.9,5.6,6.5,7.3,4.3,3.8,5.7,4.4,5.6,5.9,8,7.1,8.1,6.6,4,2.9,6.5,5.2,5.6,4,3.1,5.8,6.3,7.7,7.8,5.3,4.2,5.5,8.4,7,6.35,7.9,3.7,5.5,4.4,8.8,6.6,7.1,5,5.9,4.2,7.6,5.8,7.3,7,6.5,7.6,7.1,6.4,6.5,4.6,8.6,5.6,5.1,2.4,5.35,8.4,6.3,7,6.4,5.8,8,7.2,7.8,7.2,8.6,5.3,6.3,4.2,5.4,5.7,5.6,6.7,5.7,6.8,7.1,7.3,7,7.3,8.2,3,5.1,4,5.8,4.6,5,7.8,6.1,4.55,7.3,5.1,5.2,6.7,6.7,8.5,5.9,4.3,5.2,7.9,3.9,6.45,7.2,4.5,5.7,5.4,5.6,5.1,5.3,7.5,6.2,2.7,6.1,5.8,6.3,7.3,7.6,7.4,5.7,5,5,4.7,7.9,5.6,7.5,6.3,7.7,7.5,6.6,3.9,5.8,6.5,7,8.3,6.5,8.4,1.9,4.5,5.6,5.3,4.45,5.8,4.45,5.65,6.8};
+		String query = "update  imdbdata  set `Dir_rating`=? where Director=?";
+		for (int i = 0; i < rank.length; i++) {
+			int list = DBUtils.executeUpdate(query,rank[i],name[i]);
+			if(list>0){
+				System.out.println("Updated!"+i);
+			}
+			else System.out.println("Failed!");
+		}
+		return 0;
+	}
+	public static  int AddWriterRating(){
+		String[] Writer={"A.R. Murugadoss","Abhay Chopra","Abhishek Jawkar","Abhishek Kapoor","Abhishek Sharma","Aditya Chopra","Advait Chandan","Agneya Singh","Ajay Jhingran","Akashdeep","Akshat Verma","Ali Abbas Zafar","Amit Masurkar","Anand Pandit Motion Pictures","Anshuman Chaturvedi","Anubhav Sinha","Anukalp Goswami","Anup Kurian","Anurag Basu","Anvita Dutt","Anwer Khan","Apurva Asrani","Aseem Arora","Ashutosh Gowariker","Bareilly Ki Barfi","Bhavin Wadia","Bijesh Jayarajan","Bikas Ranjan Mishra","Bobby Khan","Bunty Rathore","Charles Dickens","Chetan Bhagat","Chintan Gandhi","D.S. Productions","David Benioff","Deepak S. Shivdasani","Garima","Gauri Shinde","Ghalib Asadbhopali","Girish Dhamija","Gulzar","Gurmeet Ram Rahim Singh","Habib Faisal","Harry Baweja","Harry Sachdeva","Harshavardhan Kulkarni","Himanshu Onkar Tripathi","Imtiaz Ali","Indervesh Yogee","Indian Film Studios","Ishaan Trivedi","Jagdish Bharti","Jai Priyadarshi","Jasmeet K. Reen","Jitendra Singh Naruka","Juhi Chaturvedi","K. Subhash","K.D. Satyam","Kabir Khan","Kanu Behl","Karan Johar","Kripa Shankar","Kumar Manjul","Kushal Ved Bakshi","M. Salim","Madhur Bhandarkar","Mahesh Bhatt","Mani Ratnam","Manoj Sharma","Massimo Carlotto","Matthew Robbins","Monjoy Joy Mukerji","Mudassar Aziz","Munish Bhardwaj","Mushtaq Sheikh","Nagesh Kukunoor","Nagnath S. Inamdar","Naman Ramachandran","Namrata Ramsay","Neelesh Misra","Neeraj Badhwar","Neeraj Pandey","Nilesh Girkar","Nitesh Tiwari","P. Jaya Kumar","Pankaj Trivedi","Param Gill","Pawan Kumar Sharma","Piyush Gupta","PLAY Entertainment","Prakash Jha","Prashant Nair","R. Balki","R.S. Prasanna","Raaj Shaandilyaa","Radhika Rao","Rahul Dholakia","Raj Nidimoru","Raja Menon","Rajat Arora","Rajeev Chaudhari","Rajeev Yogendra Nath","Rajesh Butalia","Ranjeev Verma","Remo","Ritesh Shah","Robin Bhatt","Rohit Dhawan","Ruchika Oberoi","Rupinder Chahal","Saandesh Nayak","Saba Imtiaz","Saiwyn Quadras","Saket Chaudhary","Sameer Arora","Sammy's Magic Cinema","Sanchit Gupta","Sandeep Saket","Sandeep Shrivastava","Sanjay Chauhan","Sanjay Masoom","Sanjay Sharma","Sanjeev Datta","Sanjeev Dutta","Sanjeev Kaul","Saurabh Bhave","Saurabh Varma","Sehaj Maini","Shabbir Boxwala","Shailja Kejriwal","Shaktimaan Talwar","Sharat Katariya","Shashank Khaitan","Shashie-Vermaa","Shiraz Ahmed","Shonali Bose","Siddhant Behl","Siva Ananth","Sohail Khan","Sooraj R. Barjatya","Soumendra Padhi","Sri Rao","Subhash Kapoor","Sudha Kongara","Sudip Sharma","Sujoy Ghosh","Sumit Roy","Suprotim Sengupta","Suresh Nair","Suresh Triveni","Surmeet Maavi","Svani Parekh","Syed Ahmad Afzal","Tigmanshu Dhulia","Tushar Hiranandani","Utkarshini Vashishtha","Vaibhav Misra","Vasan Bala","Vidhu Vinod Chopra","Vijay","Vijayendra Prasad","Vikram Bhatt","Vimi Datta","Vipul K. Rawal","Vipul Vig","Vishal Vijay Kumar","Vivek Agnihotri","Yunus Sajawal","Zoya Akhtar"};
+		double[] writer_rating={7.3,7.3,5,5,4.2,3.8,8.4,5.7,6.7,2.9,7.1,7.1,7.9,7.6,4.6,4.9,5.8,5.6,6.5,6.1,4.3,5.5,6.1,5.9,7.5,8.1,7.3,6.6,4.9,5.7,5.4,4,5.4,7.3,7.1,2.9,5.7,7.7,7.1,6.5,4.6,7.8,5.3,8.4,5.8,7,5.6,6.35,7.9,6.5,4.4,7,5.2,6.3,5,7.6,5.2,5.9,4.2,7.6,5.8,7.5,5.4,4.4,5.5,6.4,6.7,5.1,8.6,7.5,5.8,8.4,6.4,5.8,2.15,8,7.2,5.7,2.7,6.7,5.8,7.05,5.8,8.5,4.8,4.5,4.2,5.8,8.6,5.6,5.7,6.7,6.8,7.1,5.3,7.3,7,6.5,8.2,5.1,3,4.2,5.1,6.6,3.5,6,5.8,5.1,6.7,5.6,5.9,3.9,7.8,7.9,4.4,5.5,5.4,5.7,6.4,7.2,7.1,6.3,5.2,3.1,2.6,5.6,5.6,5.3,3.9,7.6,6.5,7.5,6.2,5.6,3.9,7.3,6.1,8.8,5,4.7,7.9,5.3,6.3,7.7,7.5,6.6,6.3,5.7,3.8,7,6.5,7,8.3,8.4,4.65,7.3,4.5,7.3,7.1,5.3,8.5,4.375,3.4,7.1,7,5.6,5.65,4.8,6.8};
+		String query = "update  imdbdata  set `writer_rating`=? where Writer=?";
+		for (int i = 0; i < writer_rating.length; i++) {
+			int list = DBUtils.executeUpdate(query,writer_rating[i],Writer[i]);
+			if(list>0){
+				System.out.println("Updated!"+i);
+			}
+			else System.out.println("Failed!");
+		}
+		return 0;
+	}
+	public static  int AddActorLikes(){
+		
+		
+			  String[] Actor={"Aditya Roy Kapoor","Hrithik Roshan","Raj Arjun","Akshay Kumar","Shahid Kapoor","Anushka Sharma Kohli","Vidyut Jammwal","Varun Dhawan","Kiara Advani","Tapsee Pannu","Amitabh Bachchan","Sunny Leone","Prabhas","Ayushmann Khurrana","Amitabh Bachchan","Arjun Kapoor","Irrfan Khan","Javed Akhtar","Rajkummar Rao","Sachin Tendulkar","Deepika Padukone","Salman Khan","Ranbir Kapoor","Nidhhi Agerwal","Anil Kapoor","Kirti Kulhari","Kunal Kapoor","Shah Rukh Khan","Akshay Kumar","Ayushmann Khurrana","Sidharth Malhotra","Nawazuddin Siddiqui","Aadar Jain","Ajay Devgn","Ayushmann Khurrana","Saif Ali Khan","Sunny Deol","Kangana Ranaut","Farhan Akhtar","Sunny Leone","Shraddha Kapoor","Rajkummar Rao","Salman Khan","Ajay Devgn","Zaira Wasim","Sidharth Malhotra","Vidya Balan","Pulkit Samrat","Salman Khan","Om Puri","Emraan Hashmi","Nawazuddin Siddiqui","Prince Shah","Farhan Akhtar","John Abraham","Tannishtha Chatterjee","Akshay Kumar","Madhavan","Sonarika Bhadoria","Manoj Bajpayee","Rishi Kapoor","Harshvardhan Rane","Tinnu Anand","Randeep Hooda","Tusshar Kapoor","Randeep Hooda","Patralekhaa","Pooja Banerjee","Anuj Sachdeva","Kishore Bhatt","V. Ravichandran","Tom Alter","Disha Patani","Irrfan Khan","Tusshar Kapoor","Harshvardhan Kapoor","Dishank Arora","Neha Dhupia","Hrithik Roshan","Saurav Chakraborty","Ashok Insan","Sonam Kapoor","Swara Bhaskar","Gippy Grewal","Satyajeet Dubey","Pankaj Berry","Aditya Roy Kapoor","John Abraham","Nawazuddin Siddiqui","Avinash Dhyani","Shubham","Rishi Bhutani","Sunny Deol","Pankaj Tripathi","Urvashi Rautela","Sahil Anand","Diana Penty","Akshay Kumar","Sara Loren","Mahesh Balraj","Divya Singh","Vinay Pathak","Priyanka Chopra","Sugandha Garg","Nishikant Kamat","Taran Bajaj","Vidya Balan","Zeenat Aman","Arjun Bijlani","John Abraham","Kajal Aggarwal","Ronit Roy","Sharman Joshi","Soha Ali Khan","Shiv Pandit","Tiger Shroff","Johnny Baweja","Aishwarya Rai Bachchan","Akshay Kumar","Shraddha Kapoor","Sidharth Malhotra","Ranveer Singh","Sunny Leone","Rasika Agashe","Raima Sen","Shashank Arora","Aanchal Dwivedi","Manoj Bajpayee","Om Puri","Richa Chadha","Sanjay Suri","Aamir Khan","Yash Soni","Ekavali Khanna","Alia Bhatt","Krrish Chhabria","Dipti","Ajay Devgn","Jimmy Shergill","Jimmy Shergill","Salman Khan","Ajit Singh Arora","Amitabh Bachchan","Himesh Reshammiya","Manish Paul","Kartik Elangovan","Aditi Rao Hydari","Neha Sharma","Tamannaah Bhatia","Shahid Kapoor","Aashish Bhatt","Sachiin Joshi","Niharica Raizada","Amitabh Bachchan","Zarine Khan","Amitabh Bachchan","Jimmy Shergill","Om Puri","Raaghavv Chanana","Bhumi Pednekar","Varun Dhawan","Amitabh Bachchan","Akshay Kumar","Shashank Arora","Kalki Koechlin","Deepika Padukone","Anushka Sharma Kohli","Gulshan Devaiah","Jake Gyllenhaal","Ranveer Singh","Amitabh Bachchan","Rajkummar Rao","Anil Kapoor","Shah Rukh Khan","Kapil Sharma","Akshay Kumar","Aishwarya Rai Bachchan","Naman Jain","Salman Khan","Naseeruddin Shah","Shraddha Kapoor","Nana Patekar","Sharman Joshi","Arshad Warsi","Arshad Warsi "};
+			  int[] Likes={3966,22045508,6687,24368573,12543534,24168,135336,7928475,222544,2037,32949790,3150318,140097,4045891,32949790,4726093,3965,3908961,178039,23464249,22836166,30503965,1114946,24483,2992700,20005,565977,32738612,24368579,4045891,7179603,1809762,2456,8610729,4045891,199828,167334,15990,10933095,3150318,9168400,178039,30503968,8610729,18870,7179605,246933,371990,30503969,18638,1936043,1809755,2686,10933105,2195580,6181,24368788,2424025,47740,851132,3019674,103128,451,695401,405140,695401,9509,4646,6469,5979,19996,138,1016923,3965,405140,62675,15690,2535172,22045556,46,655,11530996,89636,2023404,2384,68,3966,2195580,1809755,2688,2378,2187,167332,13647,364209,11894,786670,24368797,5981,1007,15822,244548,21513550,259,931,7289,246925,485,116179,2195580,1198382,286899,68220,1687092,2917,1846627,191,80122,24368802,9168467,7179611,8524011,3150275,321,1164644,3246,6,851132,18638,171821,135539,22717347,4238,232,15816709,150,4364,8610766,944293,944293,30504217,13,32949702,2968,598601,25,766210,463753,2684923,12543500,166,278,1902,32949705,173703,32949705,944293,18638,223,138758,7928334,32949705,24368811,3246,278,22836167,24168,7442,49931,8524015,32949705,178043,2992670,32738956,11491543,24368811,80122,514,30504224,33214,9168474,41006,68220,1771732,1771732};
+			
+		String query = "update  imdbdata  set `actor_likes`=? where Actors like ?";
+		for (int i = 0; i < Actor.length; i++) {
+			int list = DBUtils.executeUpdate(query, Likes[i],Actor[i]+"%");
+			if(list>0){
+				System.out.println("Updated!"+i);
+			}
+			else System.out.println("Failed!");
+		}
+		return 0;
+	}
+
+	public static String insertUser(HashMap parameters) {
+		System.out.println(parameters);
+		String success = "";
+		// userid, fname, lname, emailid, phoneno, startlocation, imei,
+		// userpass, username, roleid
+		String fname = StringHelper.n2s(parameters.get("fname"));
+		String lname = StringHelper.n2s(parameters.get("lname"));
+		String phoneno = StringHelper.n2s(parameters.get("phoneno"));
+		String userpass = "";
+		String pass1=StringHelper.n2s(parameters.get("userpass"));
+		String pass1=StringHelper.n2s(parameters.get("cuserpass"));
+		try {
+			userpass = SimpleCryptoAndroidJava.encryptString(StringHelper
+					.n2s(parameters.get("userpass")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		String username = StringHelper.n2s(parameters.get("username"));
+		
+		String data="Select 1 from useraccounts where phoneno like '"+phoneno+"' OR username like '"+username+"'";
+		boolean v=DBUtils.dataExists(data);
+		if (!v) {
+			String sql = "insert into useraccounts (fname, lname, phoneno, pass, username)  "
+					+ "	values(?,?,?,?,?)";
+			int list = DBUtils.executeUpdate(sql, fname, lname, phoneno,
+					userpass, username);
+			if (list > 0) {
+				success = "User registered Successfully";
+
+			} else {
+				success = "Error adding user to database";
+			}
+		}else{
+			success = "Duplicate user name or phone No";
+		}
+		return success;
+	}
+
+
+	public static void closeConnection(Connection conn) {
+		try {
+			conn.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+}

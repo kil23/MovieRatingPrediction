@@ -1,0 +1,10 @@
+INDEX VERSION 1.122+D:\DVD\work\project\MovieRatingPrediction\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+133427528.index
+3870538433.index
+133427528.index
+235944387.index
+999460998.index
+999460998.index
+1276342774.index
+2964539589.index
+3261645733.index

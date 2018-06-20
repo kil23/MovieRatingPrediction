@@ -1,0 +1,276 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069422686
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069439171
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.select.wordNext",1518069441866
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.select.wordNext",1518069443090
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.select.wordNext",1518069443506
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069444335
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518069449065
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518069449281
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069450541
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069458715
+error,log,,,"Core exception while retrieving the content description",1518069459566
+error,log,,,"Core exception while retrieving the content description",1518069459567
+error,log,,,"Core exception while retrieving the content description",1518069459569
+error,log,,,"Core exception while retrieving the content description",1518069459570
+error,log,,,"Core exception while retrieving the content description",1518069459571
+error,log,,,"Core exception while retrieving the content description",1518069459574
+error,log,,,"Core exception while retrieving the content description",1518069459575
+error,log,,,"Core exception while retrieving the content description",1518069459577
+error,log,,,"Core exception while retrieving the content description",1518069459578
+error,log,,,"Core exception while retrieving the content description",1518069459579
+error,log,,,"Core exception while retrieving the content description",1518069460585
+error,log,,,"Core exception while retrieving the content description",1518069460586
+error,log,,,"Core exception while retrieving the content description",1518069460588
+error,log,,,"Core exception while retrieving the content description",1518069460590
+error,log,,,"Core exception while retrieving the content description",1518069460591
+error,log,,,"Core exception while retrieving the content description",1518069460594
+error,log,,,"Core exception while retrieving the content description",1518069460595
+error,log,,,"Core exception while retrieving the content description",1518069460596
+error,log,,,"Core exception while retrieving the content description",1518069460598
+error,log,,,"Core exception while retrieving the content description",1518069460599
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069464025
+error,log,,,"Core exception while retrieving the content description",1518069464863
+error,log,,,"Core exception while retrieving the content description",1518069464864
+error,log,,,"Core exception while retrieving the content description",1518069464866
+error,log,,,"Core exception while retrieving the content description",1518069464867
+error,log,,,"Core exception while retrieving the content description",1518069464868
+error,log,,,"Core exception while retrieving the content description",1518069464871
+error,log,,,"Core exception while retrieving the content description",1518069464872
+error,log,,,"Core exception while retrieving the content description",1518069464874
+error,log,,,"Core exception while retrieving the content description",1518069464875
+error,log,,,"Core exception while retrieving the content description",1518069464876
+error,log,,,"Core exception while retrieving the content description",1518069466084
+error,log,,,"Core exception while retrieving the content description",1518069466086
+error,log,,,"Core exception while retrieving the content description",1518069466087
+error,log,,,"Core exception while retrieving the content description",1518069466088
+error,log,,,"Core exception while retrieving the content description",1518069466089
+error,log,,,"Core exception while retrieving the content description",1518069466092
+error,log,,,"Core exception while retrieving the content description",1518069466093
+error,log,,,"Core exception while retrieving the content description",1518069466094
+error,log,,,"Core exception while retrieving the content description",1518069466095
+error,log,,,"Core exception while retrieving the content description",1518069466096
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518069471962
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518069472258
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518069472482
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069473604
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1518069478249
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069483631
+error,log,,,"Core exception while retrieving the content description",1518069484474
+error,log,,,"Core exception while retrieving the content description",1518069484475
+error,log,,,"Core exception while retrieving the content description",1518069484477
+error,log,,,"Core exception while retrieving the content description",1518069484478
+error,log,,,"Core exception while retrieving the content description",1518069484479
+error,log,,,"Core exception while retrieving the content description",1518069484482
+error,log,,,"Core exception while retrieving the content description",1518069484483
+error,log,,,"Core exception while retrieving the content description",1518069484484
+error,log,,,"Core exception while retrieving the content description",1518069484485
+error,log,,,"Core exception while retrieving the content description",1518069484486
+error,log,,,"Core exception while retrieving the content description",1518069485690
+error,log,,,"Core exception while retrieving the content description",1518069485691
+error,log,,,"Core exception while retrieving the content description",1518069485693
+error,log,,,"Core exception while retrieving the content description",1518069485694
+error,log,,,"Core exception while retrieving the content description",1518069485695
+error,log,,,"Core exception while retrieving the content description",1518069485698
+error,log,,,"Core exception while retrieving the content description",1518069485699
+error,log,,,"Core exception while retrieving the content description",1518069485701
+error,log,,,"Core exception while retrieving the content description",1518069485702
+error,log,,,"Core exception while retrieving the content description",1518069485703
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1518069501113
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1518069503190
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1518069505006
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1518069506518
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069509351
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069515720
+error,log,,,"Core exception while retrieving the content description",1518069516566
+error,log,,,"Core exception while retrieving the content description",1518069516567
+error,log,,,"Core exception while retrieving the content description",1518069516569
+error,log,,,"Core exception while retrieving the content description",1518069516570
+error,log,,,"Core exception while retrieving the content description",1518069516571
+error,log,,,"Core exception while retrieving the content description",1518069516574
+error,log,,,"Core exception while retrieving the content description",1518069516575
+error,log,,,"Core exception while retrieving the content description",1518069516577
+error,log,,,"Core exception while retrieving the content description",1518069516578
+error,log,,,"Core exception while retrieving the content description",1518069516579
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069517264
+error,log,,,"Core exception while retrieving the content description",1518069517570
+error,log,,,"Core exception while retrieving the content description",1518069517571
+error,log,,,"Core exception while retrieving the content description",1518069517573
+error,log,,,"Core exception while retrieving the content description",1518069517574
+error,log,,,"Core exception while retrieving the content description",1518069517575
+error,log,,,"Core exception while retrieving the content description",1518069517578
+error,log,,,"Core exception while retrieving the content description",1518069517579
+error,log,,,"Core exception while retrieving the content description",1518069517581
+error,log,,,"Core exception while retrieving the content description",1518069517590
+error,log,,,"Core exception while retrieving the content description",1518069517592
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069519191
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069521422
+error,log,,,"Core exception while retrieving the content description",1518069522345
+error,log,,,"Core exception while retrieving the content description",1518069522346
+error,log,,,"Core exception while retrieving the content description",1518069522348
+error,log,,,"Core exception while retrieving the content description",1518069522349
+error,log,,,"Core exception while retrieving the content description",1518069522350
+error,log,,,"Core exception while retrieving the content description",1518069522353
+error,log,,,"Core exception while retrieving the content description",1518069522354
+error,log,,,"Core exception while retrieving the content description",1518069522356
+error,log,,,"Core exception while retrieving the content description",1518069522357
+error,log,,,"Core exception while retrieving the content description",1518069522358
+error,log,,,"Core exception while retrieving the content description",1518069523292
+error,log,,,"Core exception while retrieving the content description",1518069523293
+error,log,,,"Core exception while retrieving the content description",1518069523295
+error,log,,,"Core exception while retrieving the content description",1518069523296
+error,log,,,"Core exception while retrieving the content description",1518069523297
+error,log,,,"Core exception while retrieving the content description",1518069523300
+error,log,,,"Core exception while retrieving the content description",1518069523301
+error,log,,,"Core exception while retrieving the content description",1518069523303
+error,log,,,"Core exception while retrieving the content description",1518069523304
+error,log,,,"Core exception while retrieving the content description",1518069523305
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069531582
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069545658
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1518069546607
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069563599
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069566154
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069567794
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069621023
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069624909
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1518069626951
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069662883
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069679208
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069681574
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069691117
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1518069691806
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069702542
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069710246
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069710977
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1518069741405
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069742616
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069745598
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1518069757201
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770228
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770713
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770746
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770784
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770818
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770849
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770870
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770901
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770944
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770970
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069770998
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771048
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771069
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771101
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771131
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771175
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771201
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771234
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771268
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771302
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771337
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771366
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771400
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771432
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771465
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771498
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771531
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771566
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771599
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771630
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771663
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771708
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771728
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771770
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771794
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771836
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771859
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771902
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771929
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771969
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069771992
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069772035
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069772070
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069772105
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1518069772127
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069774535
+error,log,,,"Core exception while retrieving the content description",1518069776448
+error,log,,,"Core exception while retrieving the content description",1518069776449
+error,log,,,"Core exception while retrieving the content description",1518069776451
+error,log,,,"Core exception while retrieving the content description",1518069776452
+error,log,,,"Core exception while retrieving the content description",1518069776453
+error,log,,,"Core exception while retrieving the content description",1518069776456
+error,log,,,"Core exception while retrieving the content description",1518069776458
+error,log,,,"Core exception while retrieving the content description",1518069776459
+error,log,,,"Core exception while retrieving the content description",1518069776460
+error,log,,,"Core exception while retrieving the content description",1518069776461
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518069794294
+error,log,,,"Internal Error",1518069795286
+error,log,,,"Internal Error",1518069800382
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518069804412
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518069820696
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518069829093
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069846772
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069847460
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518069847900
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1518069849692
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069853275
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.navigate.backwardHistory",1518069853296
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.lineStart",1518069854831
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518069867257
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518069868852
+error,log,,,"Core exception while retrieving the content description",1518069870793
+error,log,,,"Core exception while retrieving the content description",1518069870794
+error,log,,,"Core exception while retrieving the content description",1518069870796
+error,log,,,"Core exception while retrieving the content description",1518069870797
+error,log,,,"Core exception while retrieving the content description",1518069870798
+error,log,,,"Core exception while retrieving the content description",1518069870801
+error,log,,,"Core exception while retrieving the content description",1518069870802
+error,log,,,"Core exception while retrieving the content description",1518069870804
+error,log,,,"Core exception while retrieving the content description",1518069870805
+error,log,,,"Core exception while retrieving the content description",1518069870806
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1518069996257
+opened,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069996628
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069996642
+activated,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069999142
+closed,editor,org.eclipse.jst.jsp.ui,1.1.602.v201112071516,"org.eclipse.jst.jsp.core.jspsource.source",1518069999142
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.I20110421-1800,"org.eclipse.ui.navigator.ProjectExplorer",1518070002318
+opened,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1518070002506
+activated,editor,org.eclipse.jdt.ui,3.7.1.r371_v20110824-0800,"org.eclipse.jdt.ui.CompilationUnitEditor",1518070002525
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518070016234
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.text.contentAssist.proposals",1518070018615
+error,log,,,"Internal Error",1518070019745
+error,log,,,"Internal Error",1518070021516
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1518070026189
+executed,command,org.eclipse.ui.workbench.texteditor,3.7.0.v20110505-0800,"org.eclipse.ui.edit.text.goto.wordNext",1518070027415
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1518070028718
+error,log,,,"Core exception while retrieving the content description",1518070029296
+error,log,,,"Core exception while retrieving the content description",1518070029297
+error,log,,,"Core exception while retrieving the content description",1518070029299
+error,log,,,"Core exception while retrieving the content description",1518070029300
+error,log,,,"Core exception while retrieving the content description",1518070029301
+error,log,,,"Core exception while retrieving the content description",1518070029304
+error,log,,,"Core exception while retrieving the content description",1518070029306
+activated,perspective,org.eclipse.jst.j2ee.ui,,"org.eclipse.jst.j2ee.J2EEPerspective",1518075993731
+started,bundle,org.eclipse.osgi,3.7.1.R37x_v20110808-1106,"org.eclipse.osgi",1518075993731
+started,bundle,org.eclipse.equinox.simpleconfigurator,1.0.200.v20110502-1955,"org.eclipse.equinox.simpleconfigurator",1518075993731
+started,bundle,com.ibm.icu,4.4.2.v20110208,"com.ibm.icu",1518075993747
+started,bundle,org.eclipse.core.contenttype,3.4.100.v20110423-0524,"org.eclipse.core.contenttype",1518075993747
+started,bundle,org.eclipse.core.databinding.observable,1.4.0.I20110222-0800,"org.eclipse.core.databinding.observable",1518075993747
+started,bundle,org.eclipse.core.expressions,3.4.300.v20110228,"org.eclipse.core.expressions",1518075993747
+started,bundle,org.eclipse.core.filebuffers,3.5.200.v20110505-0800,"org.eclipse.core.filebuffers",1518075993747
+started,bundle,org.eclipse.core.filesystem,1.3.100.v20110423-0524,"org.eclipse.core.filesystem",1518075993747
+started,bundle,org.eclipse.core.jobs,3.5.100.v20110404,"org.eclipse.core.jobs",1518075993747
+started,bundle,org.eclipse.core.net,1.2.100.I20110511-0800,"org.eclipse.core.net",1518075993747
+started,bundle,org.eclipse.core.resources,3.7.100.v20110510-0712,"org.eclipse.core.resources",1518075993747
+started,bundle,org.eclipse.core.runtime,3.7.0.v20110110,"org.eclipse.core.runtime",1518075993747
+started,bundle,org.eclipse.core.runtime.compatibility,3.2.100.v20100505,"org.eclipse.core.runtime.compatibility",1518075993747
+started,bundle,org.eclipse.core.runtime.compatibility.auth,3.2.200.v20110110,"org.eclipse.core.runtime.compatibility.auth",1518075993747
+started,bundle,org.eclipse.debug.core,3.7.0.v20110518,"org.eclipse.debug.core",1518075993747
+started,bundle,org.eclipse.epp.mpc.ui,1.1.1.I20110907-0947,"org.eclipse.epp.mpc.ui",1518075993747
+started,bundle,org.eclipse.epp.usagedata.gathering,1.3.1.R201106061540,"org.eclipse.epp.usagedata.gathering",1518075993747
+started,bundle,org.eclipse.epp.usagedata.recording,1.3.1.R201106061540,"org.eclipse.epp.usagedata.recording",1518075993747
+started,bundle,org.eclipse.equinox.app,1.3.100.v20110321,"org.eclipse.equinox.app",1518075993747
+started,bundle,org.eclipse.equinox.common,3.6.0.v20110523,"org.eclipse.equinox.common",1518075993747
+started,bundle,org.eclipse.equinox.ds,1.3.1.R37x_v20110701,"org.eclipse.equinox.ds",1518075993762
+started,bundle,org.eclipse.equinox.event,1.2.100.v20110502,"org.eclipse.equinox.event",1518075993762
+started,bundle,org.eclipse.equinox.p2.core,2.1.0.v20110502-1955,"org.eclipse.equinox.p2.core",1518075993762
+started,bundle,org.eclipse.equinox.p2.directorywatcher,1.0.300.v20110502-1955,"org.eclipse.equinox.p2.directorywatcher",1518075993762

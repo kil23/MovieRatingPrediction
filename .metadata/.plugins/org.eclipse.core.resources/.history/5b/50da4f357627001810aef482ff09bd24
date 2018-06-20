@@ -1,0 +1,25 @@
+package code;
+
+import java.io.IOException;
+import java.util.Random;
+
+import com.database.ConnectionManager;
+import beans.movieModel;
+
+public class findMovies extends movieData {
+
+	public static void main(String[] args) throws IOException {
+		
+//		ConnectionManager.AddActorLikes();
+		movieData m = new movieData();
+		String url=m.getMovieUrl("Aiyaary (2018) ");
+		movieModel mv=m.getMovieData(url);
+		if(mv.getRank().length() > 0){
+			System.out.println(mv.getBudget());
+			System.out.println(mv);
+		}else{
+			System.out.println("New Movie!");
+		}
+	}
+	
+}

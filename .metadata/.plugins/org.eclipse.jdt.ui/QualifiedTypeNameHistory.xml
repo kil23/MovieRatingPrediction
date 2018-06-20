@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.constant.ServerConstants"/>
+<fullyQualifiedTypeName name="code.movieData"/>
+<fullyQualifiedTypeName name="beans.movieModel"/>
+<fullyQualifiedTypeName name="beans.TrainingModel"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="com.svm.SvmClassifier"/>
+<fullyQualifiedTypeName name="com.helper.StringHelper"/>
+</qualifiedTypeNameHistroy>

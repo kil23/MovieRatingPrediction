@@ -1,0 +1,71 @@
+package com.constant;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
+public class ServerConstants {
+	public static void main(String[] args) {
+		
+	}
+	public static final String db_driver = "com.mysql.jdbc.Driver";
+	public static final String db_user = "root";
+	public static final String db_pwd = "";
+	public static final String db_url = "jdbc:mysql://localhost/movieratingnew";
+	public static final  String[] rating ={"1","2","3","4","5","6","7","8","9","10"};
+	
+	public static final String project_url = "D:\\DVD\\work\\project\\MovieRatingPrediction\\MovieRatingPrediction";
+	 public static double PIERSSON_COEF = 0.5d;
+
+	public static final String LOCAL_UPLOAD = "test";
+
+	static {
+		File f = new File(LOCAL_UPLOAD);
+		if (!f.exists()) {
+			f.mkdirs();
+			System.out.println("created folder:");
+		}
+		try {
+			System.out.println(f.getCanonicalPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// Custom Search Enginer https://cse.google.com/cse/
+	//base url for the search query
+	public final static  String searchURL = "https://www.googleapis.com/customsearch/v1?";
+	// Server Key with ip as *	  https://console.developers.google.com
+	public final static String web_search_browserKey[] =new String[] {"AIzaSyBHzBlj34ZGk8HgpfOA-J3Jxkalm2kmjc0",
+		"AIzaSyAx7KbA7enVzYdb9jdLp5je2bNmNd-Qx-Y",
+		"AIzaSyDhJFzniKyKbu-EOmYlw8MTLD2Yxsq1wAs"};
+	//Search Engine ID testyouracc@gmail.com	==>https://cse.google.com/cse/
+	public final static String customSearchEngineKey[] =new String[]{ "017923434950561787746:x-wpuv5vyuk",
+		"010668943379543802940:qk5vgwqrt2w",
+		"009596451780228110849:nbpyi3bbfxa"};
+	public static int WEB_SEARCH_INDEX=2;// less than =2 
+	
+	
+	
+	
+//	public static  HashMap catagoryFriendlyNamesMap=new HashMap();
+//	//Web Categorization API from https://www.webshrinker.com/
+//	public final static String WEB_CATEGORY_URL="https://api.webshrinker.com/categories/v2/";			
+//	public final static String[] WEB_CATEGORY_ACCESS_KEY_AND_SECRET=	//total 300 hits per month Registered in may month
+//		{"nWjdMOX341s5H57sZXl4:UlcWzBXbeZps3iOTALD1",
+//		"3RIbQ3YdriAZBUaMs1AJ:H23cGOj3wgZ39FmZ4vGO",
+//		"X2rM5JF9LPTih1UUxYuX:p896IGmMHwudqkG6hqtc"}		;	// : seperated		tt@gmail.com mail.ra@gmail.com
+//	public final static int WEB_CATEGORY_INDEX=2;	// less than =2
+//	
+
+
+}
